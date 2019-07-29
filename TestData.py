@@ -2,18 +2,6 @@
 import random
 from faker import Faker
 TD = Faker('en_GB')#this can be set to other languages see docs for more info
-
-#def create_name_list(how_many):
-#    names=[]
-#   for _ in range(0,how_many):
-#       names.append(TD.name())
-#    return names
-
-#amount =input("How many names Should be generated : ")
-#amount_int = int(amount)
-
-#print(create_name_list(amount_int))
-
 class Customers:
         def __init__(self, name, address, email):
             self.name = name
