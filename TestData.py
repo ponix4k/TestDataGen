@@ -2,6 +2,8 @@
 import random
 from faker import Faker
 TD = Faker('en_GB')#this can be set to other languages see docs for more info
+var1 = input("How Many Identities should be generated? : ")
+count = (int(var1))
 class Customers:
         def __init__(self, name, address, email):
             self.name = name
@@ -12,4 +14,8 @@ class Customers:
             return 'Name: {}\nAge: {}\nAddress: {},\nEmail: {},'.format(self.name,self.age,self.address,self.email)
 
 customer1 = Customers(TD.name(),TD.address(),TD.email())
-print(customer1)
+for _ in range(0,count):
+    print("##########  START  ##########")
+    print(customer1)
+    print("##########   END  ###########")
+    print("")
