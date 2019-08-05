@@ -1,5 +1,7 @@
 #! /usr/bin/python3
 import sqlite3
+#import mysql.connector
+#from mysql.connector import errorcode
 import random
 from faker import Faker
 TD = Faker('en_GB')#this can be set to other languages see docs for more info
@@ -30,7 +32,7 @@ connection.close()
 #            self.address = address
 #            self.email = email
 #        def __repr__(self):
-#            return 'Name: {}\nAge: {}\nAddress: {},\nEmail: {},'.format(self.name,self.age,self.address,self.email)
+#            return 'Name: {}Age: {}Address: {},Email: {},'.format(self.name,self.age,self.address,self.email)
 
 #customer1 = Customers(TD.name(),TD.address(),TD.email())
 #for _ in range(0,count):
