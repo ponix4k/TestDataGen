@@ -2,7 +2,7 @@
 import sqlite3
 import random
 from faker import Faker
-REATE TABLE IF NOT EXISTS customers (name test, address text, email text)
+
 connection = sqlite3.connect('TestData.db')
 cursor = connection.cursor()
 
