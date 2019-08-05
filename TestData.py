@@ -2,7 +2,7 @@
 import sqlite3
 import random
 from faker import Faker
-
+TD = Faker('en_GB')#this can be set to other languages see docs for more info
 connection = sqlite3.connect('TestData.db')
 cursor = connection.cursor()
 
