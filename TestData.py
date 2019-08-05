@@ -2,11 +2,11 @@
 import sqlite3
 import random
 from faker import Faker
-TD = Faker('en_GB')#this can be set to other languages see docs for more info
+REATE TABLE IF NOT EXISTS customers (name test, address text, email text)
 connection = sqlite3.connect('TestData.db')
 cursor = connection.cursor()
 
-cursor.execute('''CREATE TABLE IF NOT EXISTS customers (name test, address text, email text)''')
+cursor.execute('''CREATE TABLE IF NOT EXISTS customers (name text, address text, email text)''')
 
 cursor.execute('INSERT INTO customers VALUES(:name, :address, :email)',
                {'name': TD.name(), 'address': TD.address(), 'email': TD.email()}
