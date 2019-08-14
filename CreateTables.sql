@@ -5,11 +5,9 @@ CREATE TABLE Users (
     EmailAddress VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE Customers (
-    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    Name VARCHAR(50) NOT NULL,
-    Address VARCHAR(100) NOT NULL,
-    EmailAddress VARCHAR(20) NOT NULL,
-    Age int NOT NULL,
-    Phone VARCHAR(15) NOT NULL UNIQUE
-);
+CREATE TABLE `store`.`Customers` (
+     `Name` VARCHAR(50) NOT NULL DEFAULT '\'\'' ,
+      `Address` VARCHAR(50) NOT NULL DEFAULT '\'\'' ,
+       `Email` VARCHAR(50) NOT NULL DEFAULT '\'\'' ,
+        `Age` INT NOT NULL DEFAULT '0' ,
+         `Phone` VARCHAR NOT NULL DEFAULT '0' )
