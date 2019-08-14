@@ -12,10 +12,11 @@ def create_test_data(amount):
     for _ in range(0,amount):
         data.append(TD.name())
         data.append(TD.address())
+        data.append(TD.phone_number())
     return data
 
 with open ('TestData.csv', mode='w', newline='') as csvfile:
-    fieldnames = ['name', 'address']
+    fieldnames = ['Name', 'Address','Phone_number']
     csv_test_data = csv.writer(csvfile, delimiter=',', quotechar='"')
     for i in create_test_data(count):
         csv_test_data.writerow([i],)
