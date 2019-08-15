@@ -8,5 +8,10 @@ TD = Faker('en_GB')#this can be set to other languages see docs for more info
 mydb = mysql.connector.connect(option_files='Connection.conf')
 print("Succsess Conection ID:", mydb.connection_id)
 mycursor = mydb.cursor()
-mycursor.execute("Show tables")
+sql1 = """
+select * from customers
+"""
+mycursor.execute(sql1)
+print(mycursor)
+
 mydb.close()
