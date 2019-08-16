@@ -5,9 +5,10 @@ CREATE TABLE Users (
     EmailAddress VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE `store`.`Customers` (
-     `Name` VARCHAR(50) NOT NULL DEFAULT '\'\'' ,
-      `Address` VARCHAR(50) NOT NULL DEFAULT '\'\'' ,
-       `Email` VARCHAR(50) NOT NULL DEFAULT '\'\'' ,
-        `Age` INT NOT NULL DEFAULT '0' ,
-         `Phone` VARCHAR NOT NULL DEFAULT '0' )
+CREATE TABLE customers (
+    Name VARCHAR(50),
+    Address VARCHAR(50),
+    Email VARCHAR(50),
+    Age INT,
+    Phone VARCHAR
+);
