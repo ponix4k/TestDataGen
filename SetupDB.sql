@@ -1,4 +1,4 @@
-CREATE DATABASE wpdb;
+CREATE DATABASE store;
 CREATE USER 'store'@'localhost' IDENTIFIED BY 'store';
 GRANT ALL PRIVILEGES ON store.* TO 'store'@'localhost';
 FLUSH PRIVILEGES;
@@ -9,7 +9,8 @@ name varchar(30),
 address varchar(30),
 email varchar(50),
 age int,
-phone varchar(15)
+phone varchar(15),
+PRIMARY KEY (id)
 );
 
 INSERT INTO `customers` (name,address,email,age,phone)
