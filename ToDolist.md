@@ -2,7 +2,7 @@
 ---
 * Add function to create a parts list
 
-* Rework the email creattion to work using first inital, last name 
+* Rework the email creation to work using first inital, last name 
 
 * ~~Add more complexity to the password creation function numbers and special characters.~~ Done JW
 
