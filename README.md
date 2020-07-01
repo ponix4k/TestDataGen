@@ -14,3 +14,11 @@ run the install.sh script this will install the python libraries needed to run t
 
 user python3 SQL3.py to run the main program this iwll give you a READ ,WRITE eXit options
 and export them to the SQLite3 Database
+
+---
+## Misc
+---
+if you want to properly view the database you can use `sqllitebrowser` you can get it here :https://sqlitebrowser.org/dl/
+
+`linux (debain)`
+sudo apt-get update && sudo apt-get install sqlitebrowser -t
