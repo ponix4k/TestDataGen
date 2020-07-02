@@ -2,6 +2,7 @@
 import sqlite3
 import string
 import secrets
+import datetime
 
 
 from faker import Faker
@@ -10,15 +11,21 @@ TD = Faker('en_GB')#this can be set to other languages see docs for more info
 
 def create_password(stringLength):
     chars = string.ascii_letters + string.digits + string.punctuation
-    ''.join(secrets.choice(chars) for i in range(stringLength))
-    
+    password =''.join(secrets.choice(chars) for i in range(stringLength))
+    return password
     
 def create_users():
+    firstName = TD.first_name()
+    lastName = TD.last_name()
+    domain = TD.domain_name()
+    email = (firstName+'.'+lastName+'@'+domain)
+    StartDate = str(TD.date_this_century())
     connection = sqlite3.connect('TestData.db')
     cursor = connection.cursor()
-    cursor.execute('CREATE TABLE IF NOT EXISTS Users ("First_Name" TEXT, "Last_Name" TEXT, "Birthdate" TEXT, "Password" TEXT, "Email" TEXT);')
-    cursor.execute('INSERT INTO Users VALUES(:First_Name, :Last_Name, :Birthdate, :Password, :Email)',
-    {'First_Name': TD.first_name(),'Last_Name': TD.last_name()  ,'Birthdate': str(TD.date_of_birth(minimum_age=17, maximum_age=85)),'Password': create_password(16), 'Email': TD.email()})
+    cursor.execute('CREATE TABLE IF NOT EXISTS Users ("UID"	INTEGER ,"First_Name" TEXT ,"Last_Name" TEXT ,"Birthdate" TEXT DEFAULT "01-01-1899",  "Password" TEXT,"Email" TEXT,"Job_Title" TEXT DEFAULT "Worker","StartDate" TEXT DEFAULT "01-01-1899");')
+    cursor.execute('INSERT INTO Users VALUES(:UID, :First_Name, :Last_Name, :Birthdate, :Password, :Email, :Job_Title, :StartDate)',
+    {'UID':'1','First_Name': firstName,'Last_Name': lastName  ,'Birthdate': str(TD.date_of_birth(minimum_age=17, maximum_age=85)),
+    'Password': create_password(16), 'Email': email,'Job_Title': TD.job(), 'StartDate': StartDate})
     connection.commit()
     connection.close()
 
@@ -52,9 +59,9 @@ def select_users():
     print ("############################")
     print ("########### Users ##########")
     print ("############################")
-    print("Name, Dob, Password, Email")
+    print("Name, Dob, Password, Email, job title, start date")
     cursor.execute('SELECT * FROM Users')
-    for i in cursor.execute('SELECT First_Name, Last_Name, Birthdate, Password, Email FROM Users'):
+    for i in cursor.execute('SELECT UID,First_Name, Last_Name, Birthdate, Password, Email, Job_Title, StartDate FROM Users'):
         print(i)
     connection.close()
     print ("############################")
