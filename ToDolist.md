@@ -5,7 +5,7 @@
 
 * ~~Add more complexity to the password creation function numbers and special characters~~ Done JW
 
-* Add function to create a parts list
+* ~~Add function to create a parts list~~ Done JW
 
 * Create Employee Table
 
