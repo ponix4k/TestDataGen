@@ -1,9 +1,9 @@
 ## ToDo list as July ##
 ---
 
-* ~~ Rework the email creation to work using first inital, last name ~~ Done JW
+* ~~Rework the email creation to work using first inital, last name~~ Done JW
 
-* ~~ Add more complexity to the password creation function numbers and special characters ~~ Done JW
+* ~~Add more complexity to the password creation function numbers and special characters~~ Done JW
 
 * Add function to create a parts list
 
