@@ -23,22 +23,6 @@ def create_password(stringLength):
     password =''.join(secrets.choice(chars) for i in range(stringLength))
     return password
 
-class Person:
-    def __init__(self,first_name,last_name,domain_name,birthDate):
-        self.first_name = first_name,
-        self.last_name = last_name,
-        self.domain_name = domain_name,
-        self.birthDate = birthDate
-
-    def fullname(self):
-        return '{} {}'.format(self.first_name, self.last_name)
-    
-    def email(self):
-        return '{}.{}@{}'.format(self.first_name, self.last_name, self.domain_name)
-        
-    def DOB(self):
-        return '{}'.format(self.birthDate)
-
 def create_users(first_name,last_name,BirthDate,email,password,Job_Title,StartDate):
     conn = sqlite3.connect("TestData.db")
     cur = conn.cursor()
@@ -52,7 +36,11 @@ def multi_create_users():
     i = 0 
     count = input("How many names would you like to generate?: ")
     while i < int(count):
-        create_users(TD.first_name(),TD.last_name(),str(TD.date_of_birth(minimum_age=17, maximum_age=85)),TD.email(),create_password(16),TD.job(),str(TD.date_this_century()))
+        Fname = TD.first_name()
+        Lname = TD.first_name()
+        Domain = TD.domain_name()
+        Email = Fname+'.'+Lname+'@'+Domain
+        create_users(Fname,Lname,str(TD.date_of_birth(minimum_age=17, maximum_age=85)),Email,create_password(16),TD.job(),str(TD.date_this_century()))
         i += 1
 
 def select_users():
@@ -62,8 +50,6 @@ def select_users():
     for i in cur.execute('SELECT UID,First_Name, Last_Name, Birthdate, Password, Email, Job_Title, StartDate FROM Users'):
         print(i)
     conn.close()
-
-#create_users(TD.first_name(),TD.last_name(),str(TD.date_of_birth(minimum_age=17, maximum_age=85)),email,create_password(16),TD.job(),str(TD.date_this_century()))
 
 def create_part(Part_Name,Cost,BaseCurrency,QTY):
     conn = sqlite3.connect('TestData.db')
@@ -88,6 +74,10 @@ def select_parts():
     return rows
 
 def main():
+    Fname = TD.first_name()
+    Lname = TD.first_name()
+    Domain = TD.domain_name()
+    Email = Fname+'.'+Lname+'@'+Domain
     opt1 = input("Do you want to READ or WRITE (R/W/eXit): ")
     if opt1.upper() == 'R':
         opt1a = input("What data would you like to read ? Customers ,User ,All (C,U,A): ")
@@ -121,7 +111,7 @@ def main():
                     if opt2a.upper() == 'Y':
                         multi_create_users()
                     elif opt2a.upper() == 'N':
-                        create_users(TD.first_name(),TD.last_name(),str(TD.date_of_birth(minimum_age=17, maximum_age=85)),TD.email(),create_password(16),TD.job(),str(TD.date_this_century()))
+                        create_users(Fname,Lname,str(TD.date_of_birth(minimum_age=17, maximum_age=85)),Email,create_password(16),TD.job(),str(TD.date_this_century()))
                     elif opt2a.upper() == 'X':
                         print("Goodbye")
                         exit()
