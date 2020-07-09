@@ -21,8 +21,8 @@ def create_invoice_header(invRecNo,Customer_AccountNo,Customer_Name,Customer_Add
     #print("invRecNo,custAccountNo,customerName,customerAddress,contactNo,Email")
     conn = sqlite3.connect('TestData.db')
     cur=conn.cursor()
-    cur.execute("SELECT INVHEADID FROM INVOICEHEADER ORDER BY INVHEADHEADER DESC ")
-    InvoiceNo =cur.fetchone()[0]
+    #cur.execute("SELECT INVHEADID FROM INVOICEHEADER ORDER BY INVHEADHEADER DESC ")
+    #InvoiceNo =cur.fetchone()[0]
     cur.execute("INSERT INTO INVOICEHEADER (Customer_AccountNo,Customer_Name,Customer_Address,Contact_Number,Email) VALUES (?,?,?,?,?)",(Customer_AccountNo,Customer_Name,Customer_Address,Contact_Number,Email))
     conn.commit()
     conn.close()
@@ -30,17 +30,24 @@ def create_invoice_header(invRecNo,Customer_AccountNo,Customer_Name,Customer_Add
     print("Records Updated ")
 
 def create_line():
-    #productid,productname,colour,cost,qty):
-    colours = ['Red','Orange','Yellow','Green','Blue','Indigo','Violet','Black','White','Grey']
-    hue = ['Light','Dark']
-    types = ['T-shirt','Socks','Pants','Underwear','Jumper','Hoody']
-    productID = TD.random_int(1,10)
-    productName = TD.words(1,types,True)
-    productHue = TD.words(1,hue,True) 
-    productColourSelection = TD.words(1,colours,True)
-    productColour = (productID,str(productHue)+' '+str(productColourSelection))
-    productDescription = (str(productColour)+' '+str(productName)+'(s)')
-    print (productDescription+' added')
+    specials = "(),'[]!~#@"
+    #PRID,productDesctiption,cost,qty):
+    conn=sqlite3.connect("TestData.db")
+    cur=conn.cursor()
+    PRID = TD.random_int(1,10)
+
+    def get_description(PRID):
+        cur=conn.cursor()
+        for result in cur.execute(('SELECT Product_Description FROM PRODUCTS WHERE PRID = ?'),str(PRID)):
+            return result   #  return result
+    Desctiption =  (get_description(PRID))
+    #stip specials
+    productDesctiption = str(Desctiption)
+    for char in specials:
+        productDesctiption = productDesctiption.replace(char,"")
+    cost = TD.random_int(1,10)
+    qty = TD.random_int(1,10)
+    print (PRID,productDesctiption,cost,qty)
     
 def create_invoice_lines(invHeadRecNo,Linecount):
     i = 0
@@ -66,14 +73,26 @@ def select_invoice_headers():
     conn=sqlite3.connect("TestData.db")
     cur=conn.cursor()
     cur.execute('SELECT * FROM INVOICEHEADER')
-    for i in cur.execute('SELECT * FROM INVOICEHEADER'):
-        print(i)
+    for result in cur.execute('SELECT * FROM INVOICEHEADER'):
+        print(result)
     conn.close()
 
+def get_description(PRID):
+    conn=sqlite3.connect("TestData.db")
+    cur=conn.cursor()
+    for result in cur.execute(('SELECT Product_Description FROM PRODUCTS WHERE PRID = ?'),str(PRID)):
+        return result
+        description = result
+    print (description)
+
 def main():
-  #  dbinit()
+    #PRID = TD.random_int(1,10)
+    dbinit()
     create_invoice()
+    #create_line()
     #select_invoice_headers()
+    #get_description(PRID)
+    
 
 if __name__ == "__main__":
     main()

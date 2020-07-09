@@ -12,10 +12,10 @@ def dbinit():
     conn = sqlite3.connect("TestData.db")
     cur=conn.cursor()
     cur.execute("CREATE TABLE IF NOT EXISTS CUSTOMERS (CID INTEGER PRIMARY KEY,  First_Name TEXT, Last_Name TEXT, Contact_Number TEXT);")
-    cur.execute("CREATE TABLE IF NOT EXISTS INVOICEHEADER (INVHEADID INTEGER PRIMARY KEY,  First_Name TEXT, Last_Name TEXT, Contact_Number TEXT);")
+    cur.execute("CREATE TABLE IF NOT EXISTS INVOICEHEADER (INVHEADID INTEGER PRIMARY KEY, Customer_AccountNo TEXT, Customer_Name TEXT, Customer_Address TEXT, Contact_Number TEXT,Email TEXT);")
     cur.execute("CREATE TABLE IF NOT EXISTS INVOICELINES (IVNLINE INTEGER PRIMARY KEY,  First_Name TEXT, Last_Name TEXT, Contact_Number TEXT);")
     cur.execute("CREATE TABLE IF NOT EXISTS PARTS (PID INTEGER PRIMARY KEY AUTOINCREMENT, Part_Name TEXT, Cost TEXT,BaseCurrency TEXT, QTY INTEGER);")
-    cur.execute("CREATE TABLE IF NOT EXISTS PRODUCTS (PRID INTEGER PRIMARY KEY, Product_name TEXT, Product_Colour TEXT,Product_Description TEXT DEFAULT '',Product_Type TEXT);")
+    cur.execute("CREATE TABLE IF NOT EXISTS PRODUCTS (PRID INTEGER PRIMARY KEY, Product_name TEXT, Product_Colour TEXT, TEXT DEFAULT '',Product_Type TEXT);")
     cur.execute("CREATE TABLE IF NOT EXISTS USERS (UID INTEGER PRIMARY KEY, First_Name TEXT, Last_Name TEXT, Birthdate TEXT DEFAULT '01-01-1899',Contact_Number TEXT,Email TEXT, Password TEXT, Job_Title TEXT DEFAULT 'Worker',StartDate TEXT DEFAULT '01-01-1899');")
     conn.commit()
     conn.close()
@@ -77,9 +77,8 @@ def select_parts():
         print(i)
     conn.close()
 ###
-### product Creation ###
+### Product Creation ###
 def create_product_clothes():
-    specials = "'[]!~#@"
     colours = ['Red','Orange','Yellow','Green','Blue','Indigo','Violet','Black','White','Grey']
     hue = ['Light','Dark']
     types = ['T-shirt','Socks','Pants','Underwear','Jumper','Hoody']
@@ -114,12 +113,14 @@ def select_products():
     conn=sqlite3.connect("TestData.db")
     cur=conn.cursor()
     cur.execute('SELECT * FROM PRODUCTS')
+    print ('PRID  , Product_name, Product_Colour, Product_Description, Product_Type')
     for i in cur.execute('SELECT PRID, Product_name, Product_Colour, Product_Description, Product_Type FROM Products'):
         print(i)
     conn.close()
 ###
 
 def main():
+    specials = "'[]!~#@"
     dbinit()
     Fname = TD.first_name()
     Lname = TD.first_name()
