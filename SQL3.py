@@ -79,6 +79,7 @@ def select_parts():
 ###
 ### Product Creation ###
 def create_product_clothes():
+    specials = "'[]!~#@"
     colours = ['Red','Orange','Yellow','Green','Blue','Indigo','Violet','Black','White','Grey']
     hue = ['Light','Dark']
     types = ['T-shirt','Socks','Pants','Underwear','Jumper','Hoody']
