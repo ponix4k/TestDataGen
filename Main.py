@@ -19,18 +19,13 @@ def dbinit():
     cur.execute("CREATE TABLE IF NOT EXISTS INVOICELINES (IVNLINE INTEGER PRIMARY KEY,  First_Name TEXT, Last_Name TEXT, Contact_Number TEXT);")
     cur.execute("CREATE TABLE IF NOT EXISTS PARTS (PID INTEGER PRIMARY KEY AUTOINCREMENT, Part_Name TEXT, Cost TEXT,BaseCurrency TEXT, QTY INTEGER);")
     cur.execute("CREATE TABLE IF NOT EXISTS PRODUCTS (PRID INTEGER PRIMARY KEY, Product_name TEXT, Product_Colour TEXT, TEXT DEFAULT '',Product_Type TEXT);")
-    cur.execute("CREATE TABLE IF NOT EXISTS USERS (UID INTEGER PRIMARY KEY, First_Name TEXT, Last_Name TEXT, Birthdate TEXT DEFAULT '01-01-1899',Contact_Number TEXT,Email TEXT, Password TEXT, Job_Title TEXT DEFAULT 'Worker',StartDate TEXT DEFAULT '01-01-1899');")
     conn.commit()
     conn.close()
-    print("Database Initalised")
+    print("Database Initalised1")
 
 def main():
     specials = "'[]!~#@"
     dbinit()
-    Fname = TD.first_name()
-    Lname = TD.first_name()
-    Domain = TD.domain_name()
-    Email = Fname+'.'+Lname+'@'+Domain
     opt1 = input("Do you want to READ or WRITE (R/W/eXit): ")
     if opt1.upper() == 'R':
         opt1a = input("What data would you like to read ? (C)ustomers ,(U)ser, (PR)oducts, (Pa)rts ,All (C,U,PA,PR): ")
@@ -55,8 +50,6 @@ def main():
                     multi_create_parts()
                 elif opt2a.upper() == 'N':
                     create_product_clothes()
-                    #create_users()
-                    #create_part()
                 else:
                     print("invalid selecton")
 
@@ -77,7 +70,7 @@ def main():
                     if opt2a.upper() == 'Y':
                         multi_create_users()
                     elif opt2a.upper() == 'N':
-                        create_users(Fname,Lname,str(TD.date_of_birth(minimum_age=17, maximum_age=85)),TD.phone_number(),Email,create_password(16),TD.job(),str(TD.date_this_century()))
+                        create_users()
                     elif opt2a.upper() == 'X':
                         print("Goodbye")
                         exit()

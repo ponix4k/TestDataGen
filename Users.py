@@ -4,7 +4,7 @@ import sqlite3
 
 from faker import Faker
 
-TD = Faker('en_GB')#this can be set to other languages see docs for more info
+TD = Faker('en_GB')
 
 def dbinit():
     conn = sqlite3.connect("TestData.db")
@@ -16,15 +16,25 @@ def dbinit():
 
 def create_password(stringLength):
     chars = string.ascii_letters + string.digits + string.punctuation
-    password =''.join(secrets.choice(chars) for i in range(stringLength))
-    return password
+    Password =''.join(secrets.choice(chars) for i in range(stringLength))
+    return Password
 
-def create_users(first_name,last_name,BirthDate,contact_number,email,password,Job_Title,StartDate):
+def create_users():
+    Password = create_password(16)
+    Fname = TD.first_name()
+    Lname = TD.first_name()
+    Domain = TD.domain_name()
+    Email = Fname+'.'+Lname+'@'+Domain
+    BirthDate = TD.date_of_birth(minimum_age=17, maximum_age=85)
+    ContactNumber = TD.phone_number()    
+    JobTitle = TD.job()
+    StartDate = TD.date_this_century()    
     conn = sqlite3.connect("TestData.db")
     cur = conn.cursor()
     cur.execute("INSERT INTO Users (First_Name,Last_Name,Birthdate,Contact_Number,Email,Password,Job_Title,StartDate) Values (?,?,?,?,?,?,?,?)",
-    (first_name,last_name,BirthDate,contact_number,email,password,Job_Title,StartDate))
+    (Fname,Lname,BirthDate,ContactNumber,Email,Password,JobTitle,StartDate))
     conn.commit()
+    #print(Fname+' '+Lname,Email)
     print ("Data Added")
     conn.close()
 
@@ -36,7 +46,8 @@ def multi_create_users():
         Lname = TD.first_name()
         Domain = TD.domain_name()
         Email = Fname+'.'+Lname+'@'+Domain
-        create_users(Fname,Lname,str(TD.date_of_birth(minimum_age=17, maximum_age=85)),TD.phone_number(),Email,create_password(16),TD.job(),str(TD.date_this_century()))
+        create_users()
+            #Fname,Lname,str(TD.date_of_birth(minimum_age=17, maximum_age=85)),TD.phone_number(),Email,create_password(16),TD.job(),str(TD.date_this_century()))
         i += 1
 
 def select_users():
@@ -49,6 +60,9 @@ def select_users():
 
 def main():
     dbinit()
+    create_users()
+    multi_create_users()
+    select_users()
 
 if __name__ == "__main__":
     main()
