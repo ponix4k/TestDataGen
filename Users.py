@@ -34,8 +34,6 @@ def create_users():
     cur.execute("INSERT INTO Users (First_Name,Last_Name,Birthdate,Contact_Number,Email,Password,Job_Title,StartDate) Values (?,?,?,?,?,?,?,?)",
     (Fname,Lname,BirthDate,ContactNumber,Email,Password,JobTitle,StartDate))
     conn.commit()
-    #print(Fname+' '+Lname,Email)
-    print ("Data Added")
     conn.close()
 
 def multi_create_users():
@@ -47,7 +45,6 @@ def multi_create_users():
         Domain = TD.domain_name()
         Email = Fname+'.'+Lname+'@'+Domain
         create_users()
-            #Fname,Lname,str(TD.date_of_birth(minimum_age=17, maximum_age=85)),TD.phone_number(),Email,create_password(16),TD.job(),str(TD.date_this_century()))
         i += 1
 
 def select_users():
@@ -57,12 +54,3 @@ def select_users():
     for i in cur.execute('SELECT UID,First_Name, Last_Name, Birthdate, Password, Email, Job_Title, StartDate FROM Users'):
         print(i)
     conn.close()
-
-def main():
-    dbinit()
-    create_users()
-    multi_create_users()
-    select_users()
-
-if __name__ == "__main__":
-    main()
