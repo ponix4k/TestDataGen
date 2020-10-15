@@ -41,5 +41,3 @@ def select_parts():
     for i in cur.execute('SELECT PA_ID,Part_Name,Cost,BaseCurrency,BaseCurrencySymbol,QTY FROM Parts'):
         print(i)
     conn.close()
-
-
