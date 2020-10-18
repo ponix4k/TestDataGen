@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#! /usr/bin/python3
 from Users import (create_user, multi_create_users, select_users)
 from Parts import (create_part, multi_create_parts, select_parts)
 from Products import (create_product_clothes, multi_create_product_clothes, select_products)
@@ -33,7 +33,7 @@ def main():
         opt1a = input("What data would you like to read ? (C)ustomers, (U)ser, (PR)oducts, (Pa)rts, All (C/U/PA/PR): ")
         if opt1a.upper() == 'C':
             print("select customers")
-            select_customers()
+            #select_customers()
         elif opt1a.upper() == 'U':
             select_users()
         elif opt1a.upper() == 'PA':
@@ -43,7 +43,7 @@ def main():
         elif opt1a.upper() == 'A':
             dbinit()
             print_title("Customers")
-            select_customers()
+            #select_customers()
             
             print_title("Users")
             select_users()
