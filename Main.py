@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 from Users import (create_users,multi_create_users,select_users)
 from Parts import (create_part,multi_create_parts,select_parts)
-#from Products import ()
+from Products import (create_product_clothes,multi_create_product_clothes,select_products)
 import sqlite3
 import string
 
@@ -14,13 +14,12 @@ TD = Faker('en_GB')#this can be set to other languages see docs for more info
 def dbinit():
     conn = sqlite3.connect("TestData.db")
     cur=conn.cursor()
+    cur.execute("CREATE TABLE IF NOT EXISTS USERS (UID INTEGER PRIMARY KEY, First_Name TEXT, Last_Name TEXT, Birthdate TEXT DEFAULT '01-01-1899',Contact_Number TEXT,Email TEXT, Password TEXT, Job_Title TEXT DEFAULT 'Worker',StartDate TEXT DEFAULT '01-01-1899');")
     cur.execute("CREATE TABLE IF NOT EXISTS CUSTOMERS (CID INTEGER PRIMARY KEY,  First_Name TEXT, Last_Name TEXT, Contact_Number TEXT);")
     cur.execute("CREATE TABLE IF NOT EXISTS INVOICEHEADER (INVHEADID INTEGER PRIMARY KEY, Customer_AccountNo TEXT, Customer_Name TEXT, Customer_Address TEXT, Contact_Number TEXT,Email TEXT);")
     cur.execute("CREATE TABLE IF NOT EXISTS INVOICELINES (IVNLINE INTEGER PRIMARY KEY,  First_Name TEXT, Last_Name TEXT, Contact_Number TEXT);")
-    cur.execute("CREATE TABLE IF NOT EXISTS PARTS (PID INTEGER PRIMARY KEY AUTOINCREMENT, Part_Name TEXT, Cost TEXT,BaseCurrency TEXT,BaseCurrencySymbol TEXT, QTY INTEGER);")
-    cur.execute("CREATE TABLE IF NOT EXISTS PRODUCTS (PRID INTEGER PRIMARY KEY, Product_name TEXT, Product_Colour TEXT, TEXT DEFAULT '',Product_Type TEXT);")
-    conn.commit()
-    conn.close()
+    
+    
     print("Database Initalised")
 
 def main():
@@ -37,6 +36,28 @@ def main():
             select_parts()
         elif opt1a.upper() == 'PR':
             select_products()
+        elif opt1a.upper() == 'A':
+            dbinit()
+            print("################")
+            print("Customers")
+            print("################")
+            #select_customers()
+            print("################")
+            print("Users")
+            print("################")
+            select_users()
+            print("################")
+            print("Parts")
+            print("################")
+            select_parts()
+            print("################")
+            print("Prodcts")
+            print("################")
+            select_products()
+            print("################")
+            print("All info seleted")
+            print("################")
+            
         else:
             print ("Invalid selection")
     elif opt1.upper() == 'W':
@@ -44,7 +65,7 @@ def main():
             if opt2.upper() == 'A':
                 opt2a = input("Do you want to create multiple records ? :")
                 if opt2a.upper() == 'Y':
-                    multi_create_product()
+                    multi_create_product_clothes()
                     multi_create_users()
                     multi_create_parts()
                 elif opt2a.upper() == 'N':
@@ -78,17 +99,15 @@ def main():
                     if opt2a.upper() == 'Y':
                         multi_create_parts()
                     elif opt2a.upper() == 'N':
-                        print("PARTS CREATION")
-                        #create_part()
+                        create_part()
                     elif opt2a.upper() == 'X':
                         print("Goodbye")
                         exit()
             elif opt2.upper() == 'PR':
                     opt2a = input("Do you want to create more than one record? (Y/N/eXit): ")
                     if opt2a.upper() == 'Y':
-                        multi_create_product()
+                        multi_create_product_clothes()
                     elif opt2a.upper() == 'N':
-                        print("PARTS CREATION")
                         create_product_clothes()
                     elif opt2a.upper() == 'X':
                         print("Goodbye")

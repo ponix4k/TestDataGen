@@ -4,8 +4,15 @@ import sqlite3
 
 TD = Faker('en_GB')#this can be set to other languages see docs for more info
 
+def dbinit():
+    conn = sqlite3.connect("TestData.db")
+    cur=conn.cursor()
+    cur.execute("CREATE TABLE IF NOT EXISTS PRODUCTS (PR_ID INTEGER PRIMARY KEY, Product_name TEXT, Product_Colour TEXT, Product_Description TEXT DEFAULT '',Product_Type TEXT);")
+    conn.commit()
+    conn.close()
 ### Product Creation ###
 def create_product_clothes():
+    dbinit()
     specials = "'[]!~#@"
     colours = ['Red','Orange','Yellow','Green','Blue','Indigo','Violet','Black','White','Grey']
     hue = ['Light','Dark']
@@ -27,9 +34,8 @@ def create_product_clothes():
     cur.execute("INSERT INTO PRODUCTS (Product_name,  Product_Colour , Product_Description, Product_Type  ) VALUES (?,?,?,?)",(str(productName),  str(productColour) , str(productDescription), 'Clothes'))#Product_Type
     conn.commit()
     conn.close()
-    
 
-def multi_create_product():
+def multi_create_product_clothes():
     i = 0
     count = input("How many items do you want to create: ")
     while i < int(count):
@@ -41,8 +47,7 @@ def select_products():
     conn=sqlite3.connect("TestData.db")
     cur=conn.cursor()
     cur.execute('SELECT * FROM PRODUCTS')
-    print ('PRID  , Product_name, Product_Colour, Product_Description, Product_Type')
-    for i in cur.execute('SELECT PRID, Product_name, Product_Colour, Product_Description, Product_Type FROM Products'):
+    print ('PR_ID  , Product_name, Product_Colour, Product_Description, Product_Type')
+    for i in cur.execute('SELECT PR_ID, Product_name, Product_Colour, Product_Description, Product_Type FROM Products'):
         print(i)
     conn.close()
-###

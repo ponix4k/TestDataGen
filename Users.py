@@ -31,6 +31,7 @@ def create_users():
     StartDate = TD.date_this_century()    
     conn = sqlite3.connect("TestData.db")
     cur = conn.cursor()
+    dbinit()
     cur.execute("INSERT INTO Users (First_Name,Last_Name,Birthdate,Contact_Number,Email,Password,Job_Title,StartDate) Values (?,?,?,?,?,?,?,?)",
     (Fname,Lname,BirthDate,ContactNumber,Email,Password,JobTitle,StartDate))
     conn.commit()
