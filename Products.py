@@ -35,9 +35,8 @@ def create_product_clothes():
     conn.commit()
     conn.close()
 
-def multi_create_product_clothes():
+def multi_create_product_clothes(count):
     i = 0
-    count = input("How many items do you want to create: ")
     while i < int(count):
         create_product_clothes()
         i += 1

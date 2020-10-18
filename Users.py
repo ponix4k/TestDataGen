@@ -19,7 +19,7 @@ def create_password(stringLength):
     Password =''.join(secrets.choice(chars) for i in range(stringLength))
     return Password
 
-def create_users():
+def create_user(init_db = True ):
     Password = create_password(16)
     Fname = TD.first_name()
     Lname = TD.first_name()
@@ -31,21 +31,22 @@ def create_users():
     StartDate = TD.date_this_century()    
     conn = sqlite3.connect("TestData.db")
     cur = conn.cursor()
-    dbinit()
+    if (init_db): ## only need to initialise it once
+        dbinit()
+    
     cur.execute("INSERT INTO Users (First_Name,Last_Name,Birthdate,Contact_Number,Email,Password,Job_Title,StartDate) Values (?,?,?,?,?,?,?,?)",
-    (Fname,Lname,BirthDate,ContactNumber,Email,Password,JobTitle,StartDate))
+    (Fname, Lname, BirthDate, ContactNumber, Email, Password, JobTitle, StartDate))
     conn.commit()
     conn.close()
 
-def multi_create_users():
+def multi_create_users(count):
     i = 0 
-    count = input("How many names would you like to generate?: ")
     while i < int(count):
         Fname = TD.first_name()
         Lname = TD.first_name()
         Domain = TD.domain_name()
         Email = Fname+'.'+Lname+'@'+Domain
-        create_users()
+        create_user(i == 0)
         i += 1
 
 def select_users():
