@@ -19,8 +19,8 @@ Use `python3 SQL3.py` to run the main program this will give you a READ, WRITE e
 ---
 If you want to properly view the database you can use `sqllitebrowser` you can get it [here](https://sqlitebrowser.org/dl/)
 
-`linux (debian)`
-
+## Linux (debian)
+---
 ```bash
 sudo apt-get update && sudo apt-get install sqlitebrowser -y
 ```
