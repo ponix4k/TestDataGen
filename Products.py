@@ -35,13 +35,36 @@ def create_product_clothes():
     conn.commit()
     conn.close()
 
-def multi_create_product_clothes():
+def multi_create_product_clothes(count):
     i = 0
-    count = input("How many items do you want to create: ")
     while i < int(count):
         create_product_clothes()
         i += 1
     print("Records Created")
+
+def create_product_shoes():
+    dbinit()
+    specials = "'[]!~#@"
+    colours = ['Red','Orange','Yellow','Green','Blue','Indigo','Violet','Black','White','Grey']
+    hue = ['Light','Dark']
+    types = ['Trainers','Boots','Shooes','Heels']
+    product = TD.words(1,types,True)
+    productName = str(product)
+    for char in specials:
+        productName = productName.replace(char,"")
+    productHue = TD.words(1,hue,True) 
+    productColourSelection = TD.words(1,colours,True)
+    productColour = (str(productHue)+' '+str(productColourSelection))
+    for char in specials:
+        productColour = productColour.replace(char,"")
+    productDescription = (str(productColour)+' '+str(productName))
+    for char in specials:
+        productDescription = productDescription.replace(char,"")    
+    conn=sqlite3.connect("TestData.db")
+    cur=conn.cursor()
+    cur.execute("INSERT INTO PRODUCTS (Product_name,  Product_Colour , Product_Description, Product_Type  ) VALUES (?,?,?,?)",(str(productName),  str(productColour) , str(productDescription), 'Clothes'))#Product_Type
+    conn.commit()
+    conn.close()
 
 def select_products():
     conn=sqlite3.connect("TestData.db")
@@ -51,3 +74,6 @@ def select_products():
     for i in cur.execute('SELECT PR_ID, Product_name, Product_Colour, Product_Description, Product_Type FROM Products'):
         print(i)
     conn.close()
+
+create_product_shoes()
+select_products()

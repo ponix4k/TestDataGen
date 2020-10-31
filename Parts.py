@@ -26,9 +26,9 @@ def create_part():
     conn.commit()
     conn.close()
 
-def multi_create_parts():
+def multi_create_parts(count):
     i = 0 
-    count = input("How many names would you like to generate?: ")
+  #  count = input("How many names would you like to generate?: ")
     while i < int(count):
         create_part()
         i += 1

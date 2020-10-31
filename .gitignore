@@ -1,2 +1,5 @@
 TestData.db
-./pycache
+.pycache/
+.vscode/
+*.pyc
+*.json
