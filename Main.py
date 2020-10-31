@@ -2,7 +2,7 @@
 from Users import (create_user, multi_create_users, select_users)
 from Customers import(create_customer, multi_create_customers, select_customers)
 from Parts import (create_part, multi_create_parts, select_parts)
-from Products import (create_product_clothes, multi_create_product_clothes, select_products)
+from Products import (create_product_clothes, create_product_shoes,create_product_chocolate, multi_create_product_clothes, select_products)
 import sqlite3
 import string
 
