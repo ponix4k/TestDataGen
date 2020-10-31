@@ -1,5 +1,6 @@
 #! /usr/bin/python3
 from Users import (create_user, multi_create_users, select_users)
+from Customers import(create_customer, multi_create_customers, select_customers)
 from Parts import (create_part, multi_create_parts, select_parts)
 from Products import (create_product_clothes, multi_create_product_clothes, select_products)
 import sqlite3
@@ -15,7 +16,7 @@ def dbinit():
     conn = sqlite3.connect("TestData.db")
     cur=conn.cursor()
     cur.execute("CREATE TABLE IF NOT EXISTS USERS (UID INTEGER PRIMARY KEY, First_Name TEXT, Last_Name TEXT, Birthdate TEXT DEFAULT '01-01-1899',Contact_Number TEXT,Email TEXT, Password TEXT, Job_Title TEXT DEFAULT 'Worker',StartDate TEXT DEFAULT '01-01-1899');")
-    cur.execute("CREATE TABLE IF NOT EXISTS CUSTOMERS (CID INTEGER PRIMARY KEY,  First_Name TEXT, Last_Name TEXT, Contact_Number TEXT);")
+    cur.execute("CREATE TABLE IF NOT EXISTS CUSTOMERS (CID INTEGER PRIMARY KEY, First_Name TEXT, Last_Name TEXT, Birthdate TEXT DEFAULT '01-01-1899', Address TEXT DEFAULT '123 WISHING LANE', Contact_Number TEXT, Email TEXT, Password TEXT);")
     cur.execute("CREATE TABLE IF NOT EXISTS INVOICEHEADER (INVHEADID INTEGER PRIMARY KEY, Customer_AccountNo TEXT, Customer_Name TEXT, Customer_Address TEXT, Contact_Number TEXT,Email TEXT);")
     cur.execute("CREATE TABLE IF NOT EXISTS INVOICELINES (IVNLINE INTEGER PRIMARY KEY,  First_Name TEXT, Last_Name TEXT, Contact_Number TEXT);")
         
@@ -33,7 +34,7 @@ def main():
         opt1a = input("What data would you like to read ? (C)ustomers, (U)ser, (PR)oducts, (Pa)rts, All (C/U/PA/PR): ")
         if opt1a.upper() == 'C':
             print("select customers")
-            #select_customers()
+            select_customers()
         elif opt1a.upper() == 'U':
             select_users()
         elif opt1a.upper() == 'PA':
@@ -43,8 +44,7 @@ def main():
         elif opt1a.upper() == 'A':
             dbinit()
             print_title("Customers")
-            #select_customers()
-            
+            select_customers()
             print_title("Users")
             select_users()
                        
@@ -74,10 +74,10 @@ def main():
             elif opt2.upper() == 'C':
                     opt2a = input("Do you want to create more than one record? (Y/N/eXit): ")
                     if opt2a.upper() == 'Y':
-                        #multi_create_customers()
+                        multi_create_customers(input("How many customers would you like to generate?: "))
                         pass
                     elif opt2a.upper() == 'N':
-                        #create_customers()
+                        create_customers()
                         pass
                     elif opt2a.upper() == 'X':
                         print("Goodbye")
