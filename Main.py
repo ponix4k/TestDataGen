@@ -34,7 +34,7 @@ def main():
         opt1a = input("What data would you like to read ? (C)ustomers, (U)ser, (PR)oducts, (Pa)rts, All (C/U/PA/PR): ")
         if opt1a.upper() == 'C':
             print("select customers")
-            #select_customers()
+            select_customers()
         elif opt1a.upper() == 'U':
             select_users()
         elif opt1a.upper() == 'PA':
@@ -44,8 +44,7 @@ def main():
         elif opt1a.upper() == 'A':
             dbinit()
             print_title("Customers")
-            #select_customers()
-            
+            select_customers()
             print_title("Users")
             select_users()
                        
@@ -75,10 +74,10 @@ def main():
             elif opt2.upper() == 'C':
                     opt2a = input("Do you want to create more than one record? (Y/N/eXit): ")
                     if opt2a.upper() == 'Y':
-                        #multi_create_customers()
+                        multi_create_customers(input("How many customers would you like to generate?: "))
                         pass
                     elif opt2a.upper() == 'N':
-                        #create_customers()
+                        create_customers()
                         pass
                     elif opt2a.upper() == 'X':
                         print("Goodbye")
