@@ -1,5 +1,6 @@
 #! /usr/bin/python3
 from Users import (create_user, multi_create_users, select_users)
+from Customers import(create_customer, multi_create_customers, select_customers)
 from Parts import (create_part, multi_create_parts, select_parts)
 from Products import (create_product_clothes, multi_create_product_clothes, select_products)
 import sqlite3
@@ -15,7 +16,7 @@ def dbinit():
     conn = sqlite3.connect("TestData.db")
     cur=conn.cursor()
     cur.execute("CREATE TABLE IF NOT EXISTS USERS (UID INTEGER PRIMARY KEY, First_Name TEXT, Last_Name TEXT, Birthdate TEXT DEFAULT '01-01-1899',Contact_Number TEXT,Email TEXT, Password TEXT, Job_Title TEXT DEFAULT 'Worker',StartDate TEXT DEFAULT '01-01-1899');")
-    cur.execute("CREATE TABLE IF NOT EXISTS CUSTOMERS (CID INTEGER PRIMARY KEY,  First_Name TEXT, Last_Name TEXT, Contact_Number TEXT);")
+    cur.execute("CREATE TABLE IF NOT EXISTS CUSTOMERS (CID INTEGER PRIMARY KEY, First_Name TEXT, Last_Name TEXT, Birthdate TEXT DEFAULT '01-01-1899', Address TEXT DEFAULT '123 WISHING LANE', Contact_Number TEXT, Email TEXT, Password TEXT);")
     cur.execute("CREATE TABLE IF NOT EXISTS INVOICEHEADER (INVHEADID INTEGER PRIMARY KEY, Customer_AccountNo TEXT, Customer_Name TEXT, Customer_Address TEXT, Contact_Number TEXT,Email TEXT);")
     cur.execute("CREATE TABLE IF NOT EXISTS INVOICELINES (IVNLINE INTEGER PRIMARY KEY,  First_Name TEXT, Last_Name TEXT, Contact_Number TEXT);")
         
