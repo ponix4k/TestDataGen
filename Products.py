@@ -137,6 +137,31 @@ def multi_create_product_bedding(count):
         create_product_bedding()
         i += 1
     print("Records Created")
+    
+def create_product_computer():
+    dbinit()
+    specials = "'[]!~#@"
+    num = str(TD.random_int(000000,999999))
+    assetno = "ASS_"+num
+    
+    comptype = ['Desktop','Laptop','Server','SBC']
+    Comp = str(TD.words(1,comptype,True))
+    CpuSpeed = ['800 Mhz','1 GHz','2 GHz']
+    CpuType = ['x86','ARM']
+    Cpu = str(TD.words(1,CpuSpeed,True)+TD.words(1,CpuType))+" Processor"
+    HddSizes = ['500GB','1TB','1.5TB','2TB']
+    HddTypes = ['SSD','M2']    
+    HardDrive = str(TD.words(1,HddSizes,True)+TD.words(1,HddTypes,True))+" Drive"
+    
+    RamSize = ['8GB','16GB','32GB','64GB']
+    RamType = ['DD3','DD4','DIMM']
+    ram = str(TD.words(1,RamSize,True)+TD.words(1,RamType,True))+" Ram"
+    
+    Computer = (assetno,Comp,Cpu,HardDrive,' '+ram)
+    #for char in specials:
+     #   Computer = Computer.replace(char,"")
+        
+    print (Computer)
 
 def select_products():
     conn=sqlite3.connect("TestData.db")
@@ -146,3 +171,5 @@ def select_products():
     for i in cur.execute('SELECT PR_ID, Product_name, Product_Colour, Product_Description, Product_Type FROM Products'):
         print(i)
     conn.close()
+
+create_product_computer()
