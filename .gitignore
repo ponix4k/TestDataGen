@@ -1,0 +1,5 @@
+TestData.db
+.pycache/
+.vscode/
+*.pyc
+*.json
