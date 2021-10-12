@@ -3,3 +3,4 @@ TestData.db
 .vscode/
 *.pyc
 *.json
+debug.log
